@@ -48,7 +48,7 @@ public class MythicalPSLoginProvider implements IStatefulLoginProvider {
 	}
 
 	@Override
-	public void response(ChannelHandlerContext ctx, ByteBuf buffer) {
+	public void incomingResponse(ChannelHandlerContext ctx, ByteBuf buffer) {
 		if(loginState != LoginState.IN_GAME) {
 			LOGGER.info("Attempting login with : {} State: {}", loginDetails.getUsername(), loginState);
 		}
@@ -58,7 +58,7 @@ public class MythicalPSLoginProvider implements IStatefulLoginProvider {
 				int loginCode = buffer.readByte();
 				if (loginCode == 0) {
 					loginState = LoginState.KEYS;
-					response(ctx, buffer);
+					incomingResponse(ctx, buffer);
 				}
 				LOGGER.info("[{}] - Initial Login response {}", loginDetails.getUsername(), loginCode);
 				break;

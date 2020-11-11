@@ -9,7 +9,7 @@ import java.net.InetSocketAddress;
 public interface IStatefulLoginProvider extends Closeable {
 	void initLogin(ChannelHandlerContext ctx);
 
-	void response(ChannelHandlerContext ctx, ByteBuf buffer);
+	void incomingResponse(ChannelHandlerContext ctx, ByteBuf buffer);
 
 	InetSocketAddress getSocketAddress();
 }

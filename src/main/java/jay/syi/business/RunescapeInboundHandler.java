@@ -1,6 +1,5 @@
 package jay.syi.business;
 
-import jay.syi.business.logins.MythicalPSLoginProvider;
 import jay.syi.interfaces.IStatefulLoginProvider;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -28,7 +27,7 @@ public class RunescapeInboundHandler extends ChannelInboundHandlerAdapter {
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
 		ByteBuf buf = (ByteBuf) msg;
 		LOGGER.trace("Incoming message readable bytes {}", buf.readableBytes());
-		loginProvider.response(ctx, buf);
+		loginProvider.incomingResponse(ctx, buf);
 	}
 
 	@Override
