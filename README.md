@@ -25,13 +25,8 @@ To add a new client implement the interface `IStatefulLoginProvider` a example i
 
 Simple usage of the login provider:
 ```java
-			var loginDetails = new LoginDetails(username + i, password, false);
-			var loginProvider = new MythicalPSLoginProvider(loginDetails, inetSocketAddr);
-			var rsClient = new RSClientConnection(loginProvider);
-			rsClient.login();
-			try {
-				Thread.sleep(msDelayBetweenEachLogin);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+var loginDetails = new LoginDetails("TestUser", "TestPassword", reconnecting);
+var loginProvider = new MythicalPSLoginProvider(loginDetails, inetSocketAddr);
+var rsClient = new RSClientConnection(loginProvider);
+rsClient.login();
 ```
