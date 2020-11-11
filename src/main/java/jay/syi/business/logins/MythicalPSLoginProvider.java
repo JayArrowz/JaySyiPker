@@ -33,7 +33,7 @@ public class MythicalPSLoginProvider implements IStatefulLoginProvider {
 		this.socketAddress = socketAddress;
 	}
 
-	public boolean isLoggedIn() {
+	private boolean isLoggedIn() {
 		return loginState == LoginState.IN_GAME;
 	}
 
@@ -49,7 +49,7 @@ public class MythicalPSLoginProvider implements IStatefulLoginProvider {
 
 	@Override
 	public void incomingResponse(ChannelHandlerContext ctx, ByteBuf buffer) {
-		if(loginState != LoginState.IN_GAME) {
+		if(!isLoggedIn()) {
 			LOGGER.info("Attempting login with : {} State: {}", loginDetails.getUsername(), loginState);
 		}
 		switch (loginState) {
