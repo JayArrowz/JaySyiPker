@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import picocli.CommandLine;
 
 @Component
-@CommandLine.Command(name = "", sortOptions = false, description = { "", "", }, subcommands = { LoginCommand.class }, optionListHeading = "@|bold %nOptions|@:%n", footer = {})
+@CommandLine.Command(name = "", sortOptions = false, description = { "", "", }, subcommands = { LoginCommand.class, QuitCommand.class }, optionListHeading = "@|bold %nOptions|@:%n", footer = {})
 public class CommandRoot implements Runnable {
 
 	private static String[] header = {

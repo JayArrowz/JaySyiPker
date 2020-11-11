@@ -1,3 +1,5 @@
+package jay.syi;
+
 import jay.syi.business.CliDependencyFactory;
 import jay.syi.commands.CommandRoot;
 import org.springframework.beans.factory.InitializingBean;
@@ -6,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import picocli.CommandLine;
-import java.net.UnknownHostException;
+
 import java.util.Scanner;
 
 @SpringBootApplication
@@ -14,15 +16,16 @@ import java.util.Scanner;
 		"jay.syi"
 })
 public class ExampleProgram implements InitializingBean {
-	private static final String NOOB_USERNAME = "Luke132";
-	private static final String NOOB_PASSWORD = "Noob123";
-	private static final String SERVER_IP = "hydrixps.ddns.net";
 	private final CommandRoot commandRoot;
 	private final ApplicationContext applicationContext;
-	private boolean quit;
+	private static boolean quit;
 
-	public static void main(String[] args) throws UnknownHostException {
+	public static void main(String[] args) {
 		SpringApplication.run(ExampleProgram.class, args);
+	}
+
+	public static void quit() {
+		quit = true;
 	}
 
 	public ExampleProgram(CommandRoot commandRoot, ApplicationContext applicationContext) {
