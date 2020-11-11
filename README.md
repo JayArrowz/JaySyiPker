@@ -18,3 +18,20 @@ Options:
   -d, --delay=<msDelayBetweenEachLogin>
                            ms delay between each login
 ```
+
+To add a new client implement the interface `IStatefulLoginProvider` a example is shown inside `MythicalPSLoginProvider`
+
+
+
+Simple usage of the login provider:
+```java
+			var loginDetails = new LoginDetails(username + i, password, false);
+			var loginProvider = new MythicalPSLoginProvider(loginDetails, inetSocketAddr);
+			var rsClient = new RSClientConnection(loginProvider);
+			rsClient.login();
+			try {
+				Thread.sleep(msDelayBetweenEachLogin);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+```
