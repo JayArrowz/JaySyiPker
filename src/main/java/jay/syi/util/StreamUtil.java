@@ -10,6 +10,6 @@ public class StreamUtil {
 		for(int i = 0; i < bytes; i++) {
 			byteBuff.writeByte(buffer[i]);
 		}
-		ctx.write(byteBuff);
+		ctx.writeAndFlush(byteBuff);
 	}
 }

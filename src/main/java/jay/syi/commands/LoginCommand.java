@@ -2,16 +2,23 @@ package jay.syi.commands;
 
 import jay.syi.business.RSClientConnection;
 import jay.syi.business.logins.MythicalPSLoginProvider;
+import jay.syi.interfaces.IStatefulLoginProvider;
 import jay.syi.model.LoginDetails;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import picocli.CommandLine;
 
 import java.net.InetSocketAddress;
 
 @Component
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @CommandLine.Command(name = "login", sortOptions = false, header = {}, description = { "login to a server" },
 		optionListHeading = "@|bold %nOptions|@:%n", footer = {})
-public class LoginCommand implements Runnable {
+public class LoginCommand implements Runnable, ApplicationContextAware {
 	@CommandLine.Option(names = { "-u", "--username" }, description = "The username", required = true)
 	String username;
 
@@ -29,14 +36,16 @@ public class LoginCommand implements Runnable {
 
 	@CommandLine.Option(names = { "-d", "--delay" }, description = "ms delay between each login", required = false, defaultValue = "100")
 	private long msDelayBetweenEachLogin;
+	private ApplicationContext applicationContext;
 
 	@Override
 	public void run() {
 		var inetSocketAddr = new InetSocketAddress(ip, port);
 		for (int i = 0; i < number; i++) {
 			var loginDetails = new LoginDetails(username + i, password, false);
-			var loginProvider = new MythicalPSLoginProvider(loginDetails, inetSocketAddr);
-			var rsClient = new RSClientConnection(loginProvider);
+			var statefulLoginProvider = applicationContext.getBean(IStatefulLoginProvider.class);
+			statefulLoginProvider.set(inetSocketAddr, loginDetails);
+			var rsClient = new RSClientConnection(statefulLoginProvider);
 			rsClient.login();
 			try {
 				Thread.sleep(msDelayBetweenEachLogin);
@@ -44,5 +53,10 @@ public class LoginCommand implements Runnable {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
 	}
 }

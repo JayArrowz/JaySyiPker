@@ -1,5 +1,7 @@
 package jay.syi.model;
 
+import java.util.Objects;
+
 public class LoginDetails {
 	private final String username;
 	private final String password;
@@ -17,7 +19,13 @@ public class LoginDetails {
 		this(username, password, reconnecting, new int[9]);
 	}
 
-	public int[] getCrcs() { return crcs; }
+	public LoginDetails(String username) {
+		this(username, null, false, new int[9]);
+	}
+
+	public int[] getCrcs() {
+		return crcs;
+	}
 
 	public boolean isReconnecting() {
 		return reconnecting;
@@ -29,5 +37,20 @@ public class LoginDetails {
 
 	public String getUsername() {
 		return username;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.username.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof LoginDetails) {
+			var other = (LoginDetails) obj;
+			return obj == this ||
+					(other.username.equalsIgnoreCase(username));
+		}
+		return false;
 	}
 }

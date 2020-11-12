@@ -1,6 +1,7 @@
 package jay.syi.business.logins;
 
 import jay.syi.buffers.Stream;
+import jay.syi.interfaces.IChannelHandlerContextRegister;
 import jay.syi.interfaces.IStatefulLoginProvider;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -10,27 +11,29 @@ import jay.syi.util.StreamUtil;
 import jay.syi.util.TextClass;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
 import java.net.InetSocketAddress;
 
-public class MythicalPSLoginProvider implements IStatefulLoginProvider {
+@Component
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class MythicalPSLoginProvider extends BaseLoginProvider {
 	private final static Logger LOGGER = LogManager.getLogger(MythicalPSLoginProvider.class);
 	private static final BigInteger RSA_MODULUS = new BigInteger("95612669133916791964792058475561565423343689389615267339371722935515946359123272976676521317381550800766531334654289372355646166864266851779594805775091231014752375925208789397867354222876544309042689750172369546015666149456955593475643704259059963473988694852180997990665355463548404131660805506414722086279");
 	private static final BigInteger RSA_EXPONENT = new BigInteger("65537");
+	private final IChannelHandlerContextRegister channelHandlerContextRegister;
 
-	private final LoginDetails loginDetails;
 	private Stream stream;
 	private Stream rsaStream;
-	private LoginState loginState = LoginState.DEFAULT;
-	private final InetSocketAddress socketAddress;
+	private LoginState loginState;
 	private ISAACRandomGen encryption;
 
-	public MythicalPSLoginProvider(LoginDetails loginDetails, InetSocketAddress socketAddress) {
-		this.loginDetails = loginDetails;
-		this.stream = Stream.create();
-		this.rsaStream = Stream.create();
-		this.socketAddress = socketAddress;
+	public MythicalPSLoginProvider(IChannelHandlerContextRegister channelHandlerContextRegister) {
+		super(channelHandlerContextRegister);
+		this.channelHandlerContextRegister = channelHandlerContextRegister;
 	}
 
 	private boolean isLoggedIn() {
@@ -38,8 +41,8 @@ public class MythicalPSLoginProvider implements IStatefulLoginProvider {
 	}
 
 	@Override
-	public void initLogin(ChannelHandlerContext ctx) {
-		long l = TextClass.longForName(loginDetails.getUsername());
+	public void channelActivated(ChannelHandlerContext ctx) {
+		long l = TextClass.longForName(getLoginDetails().getUsername());
 		int i = (int) (l >> 16L & 0x1FL);
 		stream.currentOffset = 0;
 		stream.writeWordBigEndian(14);
@@ -48,8 +51,9 @@ public class MythicalPSLoginProvider implements IStatefulLoginProvider {
 	}
 
 	@Override
-	public void incomingResponse(ChannelHandlerContext ctx, ByteBuf buffer) {
-		if(!isLoggedIn()) {
+	public void channelRead(ChannelHandlerContext ctx, ByteBuf buffer) {
+		var loginDetails = getLoginDetails();
+		if (!isLoggedIn()) {
 			LOGGER.info("Attempting login with : {} State: {}", loginDetails.getUsername(), loginState);
 		}
 		switch (loginState) {
@@ -58,7 +62,7 @@ public class MythicalPSLoginProvider implements IStatefulLoginProvider {
 				int loginCode = buffer.readByte();
 				if (loginCode == 0) {
 					loginState = LoginState.KEYS;
-					incomingResponse(ctx, buffer);
+					channelRead(ctx, buffer);
 				}
 				LOGGER.info("[{}] - Initial Login response {}", loginDetails.getUsername(), loginCode);
 				break;
@@ -101,11 +105,16 @@ public class MythicalPSLoginProvider implements IStatefulLoginProvider {
 				this.encryption = new ISAACRandomGen(ai);
 				StreamUtil.queueBytes(ctx, rsaStream.currentOffset, rsaStream.buffer);
 				loginState = LoginState.COMPLETE_LOGIN;
+
 				resetStreams();
 				break;
 			case COMPLETE_LOGIN:
 				var loginResponse = buffer.readByte();
-				loginState = LoginState.IN_GAME;
+				if(loginResponse == 2) {
+					//Login success
+					loginSuccess(ctx);
+					loginState = LoginState.IN_GAME;
+				}
 				LOGGER.info("[{}] - Login response {}", loginDetails.getUsername(), loginResponse);
 				break;
 			case IN_GAME:
@@ -116,8 +125,12 @@ public class MythicalPSLoginProvider implements IStatefulLoginProvider {
 	}
 
 	@Override
-	public InetSocketAddress getSocketAddress() {
-		return this.socketAddress;
+	public IStatefulLoginProvider set(InetSocketAddress address, LoginDetails loginDetails) {
+		super.set(address, loginDetails);
+		this.stream = Stream.create();
+		this.rsaStream = Stream.create();
+		loginState = LoginState.DEFAULT;
+		return this;
 	}
 
 	private void resetStreams() {
