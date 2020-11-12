@@ -145,7 +145,7 @@ public class MythicalPSLoginProvider extends BaseLoginProvider {
 		return ai;
 	}
 
-	public enum LoginState {
+	private enum LoginState {
 		DEFAULT,
 		KEYS,
 		COMPLETE_LOGIN,
