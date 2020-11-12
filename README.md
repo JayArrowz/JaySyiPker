@@ -19,7 +19,8 @@ Options:
                            ms delay between each login
 ```
 
-To add a new client implement the interface `IStatefulLoginProvider` a example is shown inside `MythicalPSLoginProvider`
+To add a new client implement the interface `IStatefulLoginProvider` and modifiy the `LoginCommand.java` file to instaniate your new implemented provider.
+An example impl of `IStatefulLoginProvider` is shown inside `MythicalPSLoginProvider`
 
 
 
