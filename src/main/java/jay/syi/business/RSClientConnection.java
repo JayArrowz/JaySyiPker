@@ -47,7 +47,6 @@ public class RSClientConnection implements IRunescapeChannel, Closeable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		close();
 	}
 
 	@Override
