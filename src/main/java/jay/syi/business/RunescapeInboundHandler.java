@@ -28,6 +28,7 @@ public class RunescapeInboundHandler extends ChannelInboundHandlerAdapter {
 		ByteBuf buf = (ByteBuf) msg;
 		LOGGER.trace("Incoming message readable bytes {}", buf.readableBytes());
 		loginProvider.channelRead(ctx, buf);
+		buf.release();
 	}
 
 	@Override
