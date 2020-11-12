@@ -19,15 +19,22 @@ public class RunescapeInboundHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) {
 		LOGGER.trace("Channel Active {}", ctx.channel().remoteAddress());
-		loginProvider.initLogin(ctx);
-		ctx.flush();
+		loginProvider.channelActivated(ctx);
+		//ctx.flush();
 	}
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
 		ByteBuf buf = (ByteBuf) msg;
 		LOGGER.trace("Incoming message readable bytes {}", buf.readableBytes());
-		loginProvider.incomingResponse(ctx, buf);
+		loginProvider.channelRead(ctx, buf);
+		buf.release();
+	}
+
+	@Override
+	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+		this.loginProvider.channelInactive(ctx);
+		super.channelInactive(ctx);
 	}
 
 	@Override

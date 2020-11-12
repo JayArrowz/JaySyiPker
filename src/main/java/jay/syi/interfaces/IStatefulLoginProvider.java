@@ -2,12 +2,20 @@ package jay.syi.interfaces;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import jay.syi.model.LoginDetails;
+
 import java.net.InetSocketAddress;
 
 public interface IStatefulLoginProvider {
-	void initLogin(ChannelHandlerContext ctx);
+	void channelActivated(ChannelHandlerContext ctx);
 
-	void incomingResponse(ChannelHandlerContext ctx, ByteBuf buffer);
+	void channelRead(ChannelHandlerContext ctx, ByteBuf buffer);
+
+	IStatefulLoginProvider set(InetSocketAddress address, LoginDetails loginDetails);
 
 	InetSocketAddress getSocketAddress();
+
+	void channelInactive(ChannelHandlerContext ctx);
+
+	LoginDetails getLoginDetails();
 }
