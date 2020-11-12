@@ -32,7 +32,7 @@ var rsClient = new RSClientConnection(loginProvider);
 rsClient.login();
 ```
 
-For the `--impl` argument to work please ensure your Component is named. .e.g.
+For the `--impl` argument to work ensure your LoginProvider Component is named. .e.g.
 
 ```
 @Component("MyLoginProvider")
@@ -41,4 +41,4 @@ public class MythicalPSLoginProvider extends BaseLoginProvider {
 ```
 
 Would allow the command:
-`login -u Test --impl MyLoginProvider
+`login -u Test --impl MyLoginProvider`
