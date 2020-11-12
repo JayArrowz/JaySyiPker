@@ -17,9 +17,7 @@ Options:
       -po, --port=<port>   port
   -d, --delay=<msDelayBetweenEachLogin>
                            ms delay between each login
-                           
-Usage:  online
-prints username of online bots
+      -im, --impl=<impl>   login provider implementation bean name
 ```
 
 To add a new client implement the interface `IStatefulLoginProvider` and modifiy the `LoginCommand.java` file to instaniate your new implemented provider.
