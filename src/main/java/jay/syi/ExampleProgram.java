@@ -16,7 +16,6 @@ import java.util.Scanner;
 		"jay.syi"
 })
 public class ExampleProgram implements InitializingBean {
-	private final CommandRoot commandRoot;
 	private final ApplicationContext applicationContext;
 	private static boolean quit;
 
@@ -28,8 +27,7 @@ public class ExampleProgram implements InitializingBean {
 		quit = true;
 	}
 
-	public ExampleProgram(CommandRoot commandRoot, ApplicationContext applicationContext) {
-		this.commandRoot = commandRoot;
+	public ExampleProgram(ApplicationContext applicationContext) {
 		this.applicationContext = applicationContext;
 	}
 
