@@ -35,7 +35,7 @@ rsClient.login();
 For the `--impl` argument to work ensure your LoginProvider Component is named. .e.g.
 
 ```
-@Component("*MyLoginProvider*")
+@Component("MyLoginProvider")
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class MythicalPSLoginProvider extends BaseLoginProvider {
 ```
