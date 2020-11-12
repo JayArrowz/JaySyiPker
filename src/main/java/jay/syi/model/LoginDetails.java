@@ -18,11 +18,7 @@ public class LoginDetails {
 	public LoginDetails(String username, String password, boolean reconnecting) {
 		this(username, password, reconnecting, new int[9]);
 	}
-
-	public LoginDetails(String username) {
-		this(username, null, false, new int[9]);
-	}
-
+	
 	public int[] getCrcs() {
 		return crcs;
 	}
