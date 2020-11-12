@@ -20,7 +20,7 @@ Options:
       -im, --impl=<impl>   login provider implementation bean name
 ```
 
-To add a new client implement the interface `IStatefulLoginProvider` and modifiy the `LoginCommand.java` file to instaniate your new implemented provider.
+To add a new client implement the interface `IStatefulLoginProvider` then use the `--impl` switch
 An example impl of `IStatefulLoginProvider` is shown inside `MythicalPSLoginProvider`
 It is recommended to extend `BaseLoginProvider` instead of implementing `IStatefulLoginProvider`
 
@@ -35,7 +35,7 @@ rsClient.login();
 For the `--impl` argument to work ensure your LoginProvider Component is named. .e.g.
 
 ```
-@Component("MyLoginProvider")
+@Component("*MyLoginProvider*")
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class MythicalPSLoginProvider extends BaseLoginProvider {
 ```
