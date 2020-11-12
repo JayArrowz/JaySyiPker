@@ -21,8 +21,7 @@ Options:
 
 To add a new client implement the interface `IStatefulLoginProvider` and modifiy the `LoginCommand.java` file to instaniate your new implemented provider.
 An example impl of `IStatefulLoginProvider` is shown inside `MythicalPSLoginProvider`
-
-
+It is recommended to extend `BaseLoginProvider` instead of implementing `IStatefulLoginProvider`
 
 Simple usage of the login provider:
 ```java
