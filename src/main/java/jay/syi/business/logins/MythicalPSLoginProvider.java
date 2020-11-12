@@ -24,7 +24,6 @@ public class MythicalPSLoginProvider extends BaseLoginProvider {
 	private final static Logger LOGGER = LogManager.getLogger(MythicalPSLoginProvider.class);
 	private static final BigInteger RSA_MODULUS = new BigInteger("95612669133916791964792058475561565423343689389615267339371722935515946359123272976676521317381550800766531334654289372355646166864266851779594805775091231014752375925208789397867354222876544309042689750172369546015666149456955593475643704259059963473988694852180997990665355463548404131660805506414722086279");
 	private static final BigInteger RSA_EXPONENT = new BigInteger("65537");
-	private final IChannelHandlerContextRegister channelHandlerContextRegister;
 
 	private Stream stream;
 	private Stream rsaStream;
@@ -33,7 +32,6 @@ public class MythicalPSLoginProvider extends BaseLoginProvider {
 
 	public MythicalPSLoginProvider(IChannelHandlerContextRegister channelHandlerContextRegister) {
 		super(channelHandlerContextRegister);
-		this.channelHandlerContextRegister = channelHandlerContextRegister;
 	}
 
 	private boolean isLoggedIn() {
