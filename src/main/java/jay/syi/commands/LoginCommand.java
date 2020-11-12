@@ -36,6 +36,10 @@ public class LoginCommand implements Runnable, ApplicationContextAware {
 
 	@CommandLine.Option(names = { "-d", "--delay" }, description = "ms delay between each login", required = false, defaultValue = "100")
 	private long msDelayBetweenEachLogin;
+
+	@CommandLine.Option(names = { "-im", "--impl" }, description = "login provider implementation bean name", required = false, defaultValue = "MythicalPSLoginProvider")
+	public String impl;
+
 	private ApplicationContext applicationContext;
 
 	@Override
@@ -43,7 +47,7 @@ public class LoginCommand implements Runnable, ApplicationContextAware {
 		var inetSocketAddr = new InetSocketAddress(ip, port);
 		for (int i = 0; i < number; i++) {
 			var loginDetails = new LoginDetails(username + i, password, false);
-			var statefulLoginProvider = applicationContext.getBean(IStatefulLoginProvider.class);
+			var statefulLoginProvider = (IStatefulLoginProvider) applicationContext.getBean(impl);
 			statefulLoginProvider.set(inetSocketAddr, loginDetails);
 			var rsClient = new RSClientConnection(statefulLoginProvider);
 			rsClient.login();

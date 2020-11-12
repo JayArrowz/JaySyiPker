@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigInteger;
 import java.net.InetSocketAddress;
 
-@Component
+@Component("MythicalPSLoginProvider")
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class MythicalPSLoginProvider extends BaseLoginProvider {
 	private final static Logger LOGGER = LogManager.getLogger(MythicalPSLoginProvider.class);
