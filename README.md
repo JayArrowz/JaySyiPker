@@ -27,7 +27,9 @@ It is recommended to extend `BaseLoginProvider` instead of implementing `IStatef
 Simple usage of the login provider:
 ```java
 var loginDetails = new LoginDetails("TestUser", "TestPassword", reconnecting);
-var loginProvider = new MythicalPSLoginProvider(loginDetails, inetSocketAddr);
+var loginRegister = new ChannelHandlerContextRegister();
+var loginProvider = new MythicalPSLoginProvider(loginRegister);
+loginProvider.set(socketAddress, loginDetails);
 var rsClient = new RSClientConnection(loginProvider);
 rsClient.login();
 ```
