@@ -134,11 +134,6 @@ public class MythicalPSLoginProvider implements IStatefulLoginProvider {
 		return ai;
 	}
 
-	@Override
-	public void close() {
-		loginState = LoginState.DEFAULT;
-	}
-
 	public enum LoginState {
 		DEFAULT,
 		KEYS,
