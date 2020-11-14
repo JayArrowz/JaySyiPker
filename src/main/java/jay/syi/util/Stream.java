@@ -1,8 +1,4 @@
-package jay.syi.buffers;
-
-import jay.syi.util.Deque;
-import jay.syi.util.ISAACRandomGen;
-import jay.syi.util.Node;
+package jay.syi.util;
 
 import java.math.BigInteger;
 
