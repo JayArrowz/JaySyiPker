@@ -55,7 +55,7 @@ public class MythicalPSLoginProvider extends BaseLoginProvider {
 Would allow the command:
 `login -u Test --impl MyLoginProvider`
 
-The Headless client will support Socks4/5 proxies. To enable this feature add the proxy details inside socks.json
+The Headless client will support Socks4/5 proxies. To enable this feature add the proxy details inside `socks.json`
 ```
   {
     "ip": "127.0.0.1",
