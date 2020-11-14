@@ -43,7 +43,7 @@ public class ExampleProgram implements InitializingBean {
 		while (!quit) {
 			if (input.hasNext()) {
 				String cmd = input.next();
-				CommandLine.run(CommandRoot.class, factory, System.out, CommandLine.Help.Ansi.ON, cmd.trim().split(" "));
+				CommandLine.run(CommandRoot.class, factory, System.out, CommandLine.Help.Ansi.AUTO, cmd.trim().split(" "));
 				System.out.println();
 				System.out.print(CommandLine.Help.Ansi.AUTO.string("@|yellow cli>|@ "));
 			}
