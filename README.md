@@ -3,6 +3,12 @@ Headless RS2 Client Base
 
 Command Usage:
 ```
+Commands:
+  login      login to a server
+  proxylist  view proxy list
+  online     prints username of online bots
+  quit       quit cli
+  
 Usage:  login [-d=<msDelayBetweenEachLogin>] [-i=<ip>] [-n=<number>]
               [-p=<password>] [-po=<port>] -u=<username>
 login to a server
