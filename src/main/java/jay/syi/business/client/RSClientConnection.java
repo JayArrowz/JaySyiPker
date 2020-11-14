@@ -40,7 +40,7 @@ public class RSClientConnection implements IRunescapeChannel, Closeable {
 					public void initChannel(SocketChannel ch) {
 						ChannelPipeline p = ch.pipeline();
 						if(proxyDetails != null && proxyHandlerFactory != null) {
-							proxyHandlerFactory.create(proxyDetails);
+							p.addFirst(proxyHandlerFactory.create(proxyDetails));
 						}
 						p.addLast(new RunescapeInboundHandler(loginProvider, RSClientConnection.this));
 					}
