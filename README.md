@@ -63,4 +63,4 @@ The Headless client will support Socks4/5 proxies. To enable this feature add th
     "proxyType": "SOCKS_4"
   }
 ```
-The switch `--proxy-ip=127.0.0.1` can be used with the `login` command to pick a specific proxy for login. However if you have multiple logins and want to distribute different proxies to those logins, then use `--proxy-dist=random-proxy-dist`. Create different distribution patterns by implementing `IProxyDistributionStrategy` for a example see `RandomProxyDistributionStrategy`. *If no --proxy-ip or --proxy-dist is defined then a proxy will NOT be used`
+The switch `--proxy-ip=127.0.0.1` can be used with the `login` command to pick a specific proxy for login. However if you have multiple logins and want to distribute different proxies to those logins, then use `--proxy-dist=random-proxy-dist`. If no `--proxy-ip` or `--proxy-dist` is defined then a proxy will NOT be used for the login. Create different distribution patterns by implementing `IProxyDistributionStrategy` for a example see `RandomProxyDistributionStrategy`.
