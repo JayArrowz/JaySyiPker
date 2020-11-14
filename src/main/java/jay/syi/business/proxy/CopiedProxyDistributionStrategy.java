@@ -31,7 +31,7 @@ public class CopiedProxyDistributionStrategy implements IProxyDistributionStrate
 		while (count > 0) {
 			var proxyDetails = proxyProviderList.get(proxyIdx);
 			proxyListToReturn.add(proxyDetails);
-			if (proxyIdx < proxyProviderList.size()) {
+			if (proxyIdx < proxyProviderList.size()-1) {
 				proxyIdx++;
 			} else {
 				proxyIdx = 0;
