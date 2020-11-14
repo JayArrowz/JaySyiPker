@@ -68,7 +68,8 @@ public class LoginCommand implements Runnable, ApplicationContextAware {
 		try {
 			ProxyDetails specifiedProxy = null;
 			if (specificProxy != null) {
-				proxyDistributionStrategyName = CopiedProxyDistributionStrategy.class.getCanonicalName();
+				//Define constant?
+				proxyDistributionStrategyName = "copied-proxy-dist";
 			}
 			var inetSocketAddr = new InetSocketAddress(ip, port);
 			List<ProxyDetails> proxyList = new ArrayList<>();
