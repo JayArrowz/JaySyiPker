@@ -1,9 +1,8 @@
 package jay.syi.business.logins;
 
 import io.netty.channel.ChannelHandlerContext;
-import jay.syi.buffers.Stream;
-import jay.syi.interfaces.IChannelHandlerContextRegister;
-import jay.syi.interfaces.IStatefulLoginProvider;
+import jay.syi.interfaces.client.IChannelHandlerContextRegister;
+import jay.syi.interfaces.client.IStatefulLoginProvider;
 import jay.syi.model.LoginDetails;
 
 import java.net.InetSocketAddress;
@@ -31,7 +30,7 @@ public abstract class BaseLoginProvider implements IStatefulLoginProvider {
 	}
 
 	protected void loginSuccess(ChannelHandlerContext ctx) {
-		channelHandlerContextRegister.addLogin(getLoginDetails(), ctx);
+		channelHandlerContextRegister.login(getLoginDetails(), ctx);
 
 	}
 

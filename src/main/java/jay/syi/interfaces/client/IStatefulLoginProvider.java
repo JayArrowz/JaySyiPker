@@ -1,4 +1,4 @@
-package jay.syi.interfaces;
+package jay.syi.interfaces.client;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

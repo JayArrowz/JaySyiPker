@@ -1,6 +1,6 @@
 package jay.syi.commands;
 
-import jay.syi.interfaces.IChannelHandlerContextRegister;
+import jay.syi.interfaces.client.IChannelHandlerContextRegister;
 import jay.syi.model.LoginDetails;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -22,7 +22,7 @@ public class OnlineBots implements Runnable {
 	public void run() {
 		System.out.println("Online Bots:");
 		channelHandlerContextRegister
-				.getRegister()
+				.get()
 				.keySet()
 				.stream()
 				.map(LoginDetails::getUsername)

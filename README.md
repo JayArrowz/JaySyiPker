@@ -18,6 +18,10 @@ Options:
   -d, --delay=<msDelayBetweenEachLogin>
                            ms delay between each login
       -im, --impl=<impl>   login provider implementation bean name
+      --proxy-dist=<proxyDistributionStrategyName>
+                           Defines the proxy distribution strategy (copied-proxy-dist, random-proxy-dist)
+      --proxy-ip=<specificProxy>
+                           Uses a specific proxy
 ```
 
 To add a new client implement the interface `IStatefulLoginProvider` then use the `--impl` switch

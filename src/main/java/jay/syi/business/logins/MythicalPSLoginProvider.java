@@ -1,8 +1,8 @@
 package jay.syi.business.logins;
 
 import jay.syi.buffers.Stream;
-import jay.syi.interfaces.IChannelHandlerContextRegister;
-import jay.syi.interfaces.IStatefulLoginProvider;
+import jay.syi.interfaces.client.IChannelHandlerContextRegister;
+import jay.syi.interfaces.client.IStatefulLoginProvider;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import jay.syi.model.LoginDetails;

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import picocli.CommandLine;
 
 @Component
-@CommandLine.Command(name = "", sortOptions = false, description = { "", "", }, subcommands = { LoginCommand.class, OnlineBots.class, QuitCommand.class }, optionListHeading = "@|bold %nOptions|@:%n", footer = {})
+@CommandLine.Command(name = "", sortOptions = false, description = {"", "",}, subcommands = {LoginCommand.class, ProxyListCommand.class, OnlineBots.class, QuitCommand.class}, optionListHeading = "@|bold %nOptions|@:%n", footer = {})
 public class CommandRoot implements Runnable {
 
 	private static String[] header = {
@@ -12,7 +12,7 @@ public class CommandRoot implements Runnable {
 					+ " /==.'-     /  |==|-  _.-`|==|, \\/ /, / \r\n" + "/==/ -   .-'   |==|   `.-.|==|-  \\|  |  \r\n"
 					+ "|==|_   /_,-. /==/_ ,    /|==| ,  | -|  \r\n" + "|==|  , \\_.' )|==|    .-' |==| -   _ |  \r\n"
 					+ "\\==\\-  ,    ( |==|_  ,`-._|==|  /\\ , |  \r\n" + " /==/ _  ,  / /==/ ,     //==/, | |- |  \r\n"
-					+ " `--`------'  `--`-----`` `--`./  `--`  \r\n" + "           JaySyiPker CLI" };
+					+ " `--`------'  `--`-----`` `--`./  `--`  \r\n" + "           JaySyiPker CLI"};
 
 	public void run() {
 		for (String line : header) {

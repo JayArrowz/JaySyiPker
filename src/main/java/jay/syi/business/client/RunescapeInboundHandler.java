@@ -1,6 +1,7 @@
-package jay.syi.business;
+package jay.syi.business.client;
 
-import jay.syi.interfaces.IStatefulLoginProvider;
+import jay.syi.interfaces.client.IRunescapeChannel;
+import jay.syi.interfaces.client.IStatefulLoginProvider;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -10,10 +11,13 @@ import org.apache.logging.log4j.Logger;
 public class RunescapeInboundHandler extends ChannelInboundHandlerAdapter {
 
 	private final IStatefulLoginProvider loginProvider;
+	//What a horrible circular dep
+	private final IRunescapeChannel rsClientConnection;
 	private final static Logger LOGGER = LogManager.getLogger(RunescapeInboundHandler.class);
 
-	public RunescapeInboundHandler(IStatefulLoginProvider loginProvider) {
+	public RunescapeInboundHandler(IStatefulLoginProvider loginProvider, IRunescapeChannel rsClientConnection) {
 		this.loginProvider = loginProvider;
+		this.rsClientConnection = rsClientConnection;
 	}
 
 	@Override
@@ -34,6 +38,7 @@ public class RunescapeInboundHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
 		this.loginProvider.channelInactive(ctx);
+		rsClientConnection.close();
 		super.channelInactive(ctx);
 	}
 

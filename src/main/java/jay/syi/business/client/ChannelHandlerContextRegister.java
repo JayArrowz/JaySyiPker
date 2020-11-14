@@ -1,8 +1,8 @@
-package jay.syi.business;
+package jay.syi.business.client;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import jay.syi.interfaces.IChannelHandlerContextRegister;
+import jay.syi.interfaces.client.IChannelHandlerContextRegister;
 import jay.syi.model.LoginDetails;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -18,7 +18,7 @@ public class ChannelHandlerContextRegister implements IChannelHandlerContextRegi
 			= new HashMap<>();
 
 	@Override
-	public void addLogin(LoginDetails details, ChannelHandlerContext ctx) {
+	public void login(LoginDetails details, ChannelHandlerContext ctx) {
 		synchronized (lock) {
 			loginDetails.put(details, ctx);
 		}
@@ -35,7 +35,7 @@ public class ChannelHandlerContextRegister implements IChannelHandlerContextRegi
 	}
 
 	@Override
-	public HashMap<LoginDetails, ChannelHandlerContext> getRegister() {
+	public HashMap<LoginDetails, ChannelHandlerContext> get() {
 		return loginDetails;
 	}
 
