@@ -39,7 +39,7 @@ public class LoginCommand implements Runnable, ApplicationContextAware {
 	@CommandLine.Option(names = {"-n", "--num"}, description = "Number of robots", required = false, defaultValue = "1")
 	int number;
 
-	@CommandLine.Option(names = {"-i", "--ip"}, description = "ip", required = false, defaultValue = "hydrixps.ddns.net")
+	@CommandLine.Option(names = {"-i", "--ip"}, description = "ip", required = false, defaultValue = "93.158.238.74")
 	private String ip;
 
 	@CommandLine.Option(names = {"-po", "--port"}, description = "port", required = false, defaultValue = "43594")
@@ -48,7 +48,7 @@ public class LoginCommand implements Runnable, ApplicationContextAware {
 	@CommandLine.Option(names = {"-d", "--delay"}, description = "ms delay between each login", required = false, defaultValue = "100")
 	private long msDelayBetweenEachLogin;
 
-	@CommandLine.Option(names = {"-im", "--impl"}, description = "login provider implementation bean name", required = false, defaultValue = "MythicalPSLoginProvider")
+	@CommandLine.Option(names = {"-im", "--impl"}, description = "login provider implementation bean name", required = false, defaultValue = "Dreamscape")
 	private String impl;
 
 	@CommandLine.Option(names = {"--proxy-dist"}, description = "Defines the proxy distribution strategy", required = false)
