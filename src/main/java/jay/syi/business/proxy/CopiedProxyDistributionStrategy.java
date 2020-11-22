@@ -7,19 +7,20 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component("copied-proxy-dist")
 public class CopiedProxyDistributionStrategy implements IProxyDistributionStrategy {
 
-	private final IProxyListProvider proxyListProvider;
+	private final List<IProxyListProvider> proxyListProvider;
 
-	public CopiedProxyDistributionStrategy(IProxyListProvider proxyListProvider) {
+	public CopiedProxyDistributionStrategy(List<IProxyListProvider> proxyListProvider) {
 		this.proxyListProvider = proxyListProvider;
 	}
 
 	@Override
 	public List<ProxyDetails> getNext(int count) {
-		var proxyProviderList = this.proxyListProvider.get();
+		var proxyProviderList = this.proxyListProvider.stream().flatMap(t -> t.get().stream()).collect(Collectors.toList());
 
 		if(proxyProviderList.isEmpty()) {
 			return new ArrayList<>();

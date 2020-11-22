@@ -1,4 +1,4 @@
-package jay.syi.business.proxy;
+package jay.syi.business.proxy.provider;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jay.syi.interfaces.proxy.IProxyListProvider;
@@ -14,11 +14,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Component("file-proxy")
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-public class ProxyListProvider implements IProxyListProvider, InitializingBean {
+public class ProxyFileListProvider implements IProxyListProvider, InitializingBean {
 	private List<ProxyDetails> proxyDetails = new ArrayList<>();
-	private static final Logger LOGGER = LogManager.getLogger(ProxyListProvider.class);
+	private static final Logger LOGGER = LogManager.getLogger(ProxyFileListProvider.class);
 
 	@Override
 	public void add(ProxyDetails details) {

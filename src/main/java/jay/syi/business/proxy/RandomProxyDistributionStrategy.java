@@ -14,7 +14,7 @@ public class RandomProxyDistributionStrategy implements IProxyDistributionStrate
 
 	private final IProxyDistributionStrategy copiedProxyDistStrategy;
 
-	public RandomProxyDistributionStrategy(IProxyListProvider proxyListProvider) {
+	public RandomProxyDistributionStrategy(List<IProxyListProvider> proxyListProvider) {
 		this.copiedProxyDistStrategy = new CopiedProxyDistributionStrategy(proxyListProvider);
 	}
 

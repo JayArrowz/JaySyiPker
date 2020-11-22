@@ -10,6 +10,9 @@ public class ProxyDetails {
 	private String ip;
 	private int port;
 
+	public ProxyDetails() {
+	}
+
 	@Override
 	public int hashCode() {
 		return ip.hashCode();
@@ -32,6 +35,9 @@ public class ProxyDetails {
 	public ProxyType getProxyType() {
 		return proxyType;
 	}
+	public void setProxyType(ProxyType proxyType) {
+		this.proxyType = proxyType;
+	}
 
 	public String getPassword() {
 		return password;
@@ -43,5 +49,21 @@ public class ProxyDetails {
 
 	public String getIp() {
 		return ip;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
 	}
 }
