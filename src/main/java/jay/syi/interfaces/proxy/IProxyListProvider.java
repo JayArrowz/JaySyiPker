@@ -2,7 +2,7 @@ package jay.syi.interfaces.proxy;
 
 import jay.syi.model.ProxyDetails;
 
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.util.List;
 
 public interface IProxyListProvider {
@@ -10,5 +10,5 @@ public interface IProxyListProvider {
 
 	List<ProxyDetails> get();
 
-	void load();
+	void load() throws IOException;
 }

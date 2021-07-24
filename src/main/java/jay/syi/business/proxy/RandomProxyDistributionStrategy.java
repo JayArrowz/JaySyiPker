@@ -5,7 +5,6 @@ import jay.syi.interfaces.proxy.IProxyListProvider;
 import jay.syi.model.ProxyDetails;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 

@@ -1,8 +1,5 @@
 package jay.syi.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.netty.handler.codec.socks.SocksAddressType;
-
 public class ProxyDetails {
 	private ProxyType proxyType = ProxyType.SOCKS_5;
 	private String username;

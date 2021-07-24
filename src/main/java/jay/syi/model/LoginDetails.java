@@ -1,7 +1,5 @@
 package jay.syi.model;
 
-import java.util.Objects;
-
 public class LoginDetails {
 	private final String username;
 	private final String password;

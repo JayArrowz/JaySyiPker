@@ -1,7 +1,6 @@
 package jay.syi.commands;
 
 import jay.syi.business.client.RSClientConnection;
-import jay.syi.business.proxy.CopiedProxyDistributionStrategy;
 import jay.syi.interfaces.client.IProxyDistributionStrategy;
 import jay.syi.interfaces.client.IStatefulLoginProvider;
 import jay.syi.interfaces.proxy.IProxyHandlerFactory;
