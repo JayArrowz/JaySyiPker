@@ -14,7 +14,7 @@ import java.net.URL;
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class JetKaiProxyProvider extends BaseProxyProvider {
 
-    private final String JET_KAI_PROXY_REPO_URL = "https://raw.githubusercontent.com/KaiBurton/free-proxies-autoupdated/main/proxies-socks4%2B5-beautify.json";
+    private final String JET_KAI_PROXY_REPO_URL = "https://raw.githubusercontent.com/jetkai/proxy-list/main/online-proxies/json/proxies-socks4%2B5-beautify.json";
 
     @Override
     public void load() throws IOException {
